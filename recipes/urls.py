@@ -11,4 +11,5 @@ urlpatterns = [
          views.category, name="category"),
     path('recipes/<int:id>/', views.recipe, name="recipe"),
 
+
 ]
