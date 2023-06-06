@@ -70,6 +70,7 @@ h6 {
 
 img {
   max-width: 100%;
+
 }
 
 a {
@@ -166,7 +167,9 @@ a {
 }
 
 .recipe img {
-  max-width: 100%;
+  
+  width: 100%;
+  
 }
 
 .recipe-list-item {
@@ -354,14 +357,25 @@ a {
 }
 
 .form-content button {
-  padding: 1rem 2rem;
-  border: none;
+  padding: 1rem 2.3rem;
+  border-radius: 3px;
   background: var(--color-primary-dark);
   color: var(--color-white);
+  font-size: 1.6rem;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%) 
+  
+  
+  
 }
 
 .inline-form {
-  display: inline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .span-2 {
@@ -369,11 +383,14 @@ a {
 }
 
 .plaintext-button {
-  display: inline;
+  padding: 1rem 2rem;
   border: none;
-  background: none;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  display: inline;
+  border-radius: 2px;
   cursor: pointer;
-  color: var(--color-primary);
+  color: var(--color-white);
   font-size: 1.6rem;
 }
 
@@ -490,7 +507,7 @@ a {
   left: -255px;
 }
 
-.button-show-menu {
+.form-content-show-menu {
   position: fixed;
   left: 265px;
   top: 2rem;
