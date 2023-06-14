@@ -69,8 +69,7 @@ h6 {
 }
 
 img {
-  max-width: 100%;
-
+  width: 100%;
 }
 
 a {
@@ -167,9 +166,7 @@ a {
 }
 
 .recipe img {
-  
   width: 100%;
-  
 }
 
 .recipe-list-item {
@@ -357,25 +354,14 @@ a {
 }
 
 .form-content button {
-  padding: 1rem 2.3rem;
-  border-radius: 3px;
+  padding: 1rem 2rem;
+  border: none;
   background: var(--color-primary-dark);
   color: var(--color-white);
-  font-size: 1.6rem;
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%) 
-  
-  
-  
 }
 
 .inline-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline;
 }
 
 .span-2 {
@@ -383,15 +369,17 @@ a {
 }
 
 .plaintext-button {
+  display: grid;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 1.6rem;
   padding: 1rem 2rem;
   border: none;
   background: var(--color-primary-dark);
   color: var(--color-white);
-  display: inline;
-  border-radius: 2px;
-  cursor: pointer;
-  color: var(--color-white);
-  font-size: 1.6rem;
+  margin: auto;
 }
 
 /* Messages */
@@ -452,7 +440,7 @@ a {
 
 .authors-dashboard-container {
   max-width: 64rem;
-  text-align: left;
+  text-align: center;
   padding: var(--spacing-gutter-medium);
   margin: 0 auto;
 }
@@ -507,7 +495,7 @@ a {
   left: -255px;
 }
 
-.form-content-show-menu {
+.button-show-menu {
   position: fixed;
   left: 265px;
   top: 2rem;
