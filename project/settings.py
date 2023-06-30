@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from utils.environment import get_env_variable, parse_comma_sep_str_to_list
 import os
 from pathlib import Path
 
@@ -31,8 +32,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.environ.get('DEBUG') == '1' else False
 
-ALLOWED_HOSTS: list[str] = ['*']
-
+ALLOWED_HOSTS: list[str] = parse_comma_sep_str_to_list(
+    get_env_variable('ALLOWED_HOST')
+)
+CSRF_TRUSTED_ORIGINS: list[str] = parse_comma_sep_str_to_list(
+    get_env_variable('CSRF_TRUSTED_ORIGINS')
+)
 
 # Application definition
 
@@ -170,6 +175,3 @@ INTERNAL_IPS = [
     '127.0.0.1',
 
 ]
-CSRF_TRUSTED_ORIGINS = [
-
-    'https://*.receitas.marcelokfws.online/']
