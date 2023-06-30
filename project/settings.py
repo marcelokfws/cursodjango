@@ -170,3 +170,9 @@ INTERNAL_IPS = [
     '127.0.0.1',
 
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "http://cauans-technology.com",
+    "http://www.cauans-technology.com",
+    "https://cauans-technology.com",
+    "https://www.cauans-technology.com",
+]

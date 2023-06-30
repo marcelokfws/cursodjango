@@ -1,13 +1,13 @@
 ###############################################################################
 # Replace
-# ___cursodjango to the name of the gunicorn file you want
-# marceloesileia to your user name
-# cursodjango to the folder name of your project
+# cursodjango to the name of the gunicorn file you want
+# marcelokfws to your user name
+# app_repo to the folder name of your project
 # project to the folder name where you find a file called wsgi.py
 #
 ###############################################################################
-# Criando o arquivo ___cursodjango.socket
-sudo nano /etc/systemd/system/___cursodjango.socket
+# Criando o arquivo cursodjango.socket
+sudo nano /etc/systemd/system/cursodjango.socket
 
 ###############################################################################
 # Conteúdo do arquivo
@@ -15,61 +15,61 @@ sudo nano /etc/systemd/system/___cursodjango.socket
 Description=gunicorn blog socket
 
 [Socket]
-ListenStream=/run/___cursodjango.socket
+ListenStream=/run/cursodjango.socket
 
 [Install]
 WantedBy=sockets.target
 
 ###############################################################################
-# Criando o arquivo ___cursodjango.service
-sudo nano /etc/systemd/system/___cursodjango.service
+# Criando o arquivo cursodjango.service
+sudo nano /etc/systemd/system/cursodjango.service
 
 ###############################################################################
 # Conteúdo do arquivo
 [Unit]
 Description=Gunicorn daemon (You can change if you want)
-Requires=___cursodjango.socket
+Requires=cursodjango.socket
 After=network.target
 
 [Service]
-User=marceloesileia
+User=marcelokfws
 Group=www-data
 Restart=on-failure
-EnvironmentFile=/home/marceloesileia/cursodjango/.env
-WorkingDirectory=/home/marceloesileia/cursodjango
+EnvironmentFile=/home/marcelokfws/app_repo/.env
+WorkingDirectory=/home/marcelokfws/app_repo
 # --error-logfile --enable-stdio-inheritance --log-level and --capture-output
 # are all for debugging purposes.
-ExecStart=/home/marceloesileia/cursodjango/venv/bin/gunicorn \
-          --error-logfile /home/marceloesileia/cursodjango/gunicorn-error-log \
+ExecStart=/home/marcelokfws/app_repo/venv/bin/gunicorn \
+          --error-logfile /home/marcelokfws/app_repo/gunicorn-error-log \
           --enable-stdio-inheritance \
           --log-level "debug" \
           --capture-output \
           --access-logfile - \
           --workers 6 \
-          --bind unix:/run/___cursodjango.socket \
-          __WSGI_FOLDER__.wsgi:application
+          --bind unix:/run/cursodjango.socket \
+          project.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 
 ###############################################################################
 # Ativando
-sudo systemctl start ___cursodjango.socket
-sudo systemctl enable ___cursodjango.socket
+sudo systemctl start cursodjango.socket
+sudo systemctl enable cursodjango.socket
 
 # Checando
-sudo systemctl status ___cursodjango.socket
-curl --unix-socket /run/___cursodjango.socket localhost
-sudo systemctl status ___cursodjango
+sudo systemctl status cursodjango.socket
+curl --unix-socket /run/cursodjango.socket localhost
+sudo systemctl status cursodjango
 
 # Restarting
-sudo systemctl restart ___cursodjango.service
-sudo systemctl restart ___cursodjango.socket
-sudo systemctl restart ___cursodjango
+sudo systemctl restart cursodjango.service
+sudo systemctl restart cursodjango.socket
+sudo systemctl restart cursodjango
 
 # After changing something
 sudo systemctl daemon-reload
 
 # Debugging
-sudo journalctl -u ___cursodjango.service
-sudo journalctl -u ___cursodjango.socket
+sudo journalctl -u cursodjango.service
+sudo journalctl -u cursodjango.socket

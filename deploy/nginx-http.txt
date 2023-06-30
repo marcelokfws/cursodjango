@@ -2,14 +2,12 @@
 #
 # REPLACES
 # 34.122.137.54 = Replace with your domain
-# /home/marceloesileia
-#= Replace with the path to the folder for the project
-# /home/marceloesileia/static
-#= Replace with the path to the folder for static files
-# /home/marceloesileia/media
-#= Replace with the path to the folder for media files
-# cursodjango.socket
-#= Replace with your unix socket name
+# /home/marcelokfws/app_repo
+ = Replace with the path to the folder for the project
+# /home/marcelokfws/app_repo/static
+ = Replace with the path to the folder for static files
+# /home/marcelokfws/app_repo/media = Replace with the path to the folder for media files
+# cursodjango.socket = Replace with your unix socket name
 # 
 # Set timezone
 # List - timedatectl list-timezones
@@ -24,27 +22,23 @@ server {
   # Add index.php to the list if you are using PHP
   index index.html index.htm index.nginx-debian.html index.php;
   
-  # ATTENTION: /home/marceloesileia/static
+  # ATTENTION: /home/marcelokfws/app_repo/static
 
   location /static {
     autoindex on;
-    alias /home/marceloesileia/static
+    alias /home/marcelokfws/app_repo/static
 ;
   }
 
-  # ATTENTION: /home/marceloesileia/media
- 
+  # ATTENTION: /home/marcelokfws/app_repo/media 
   location /media {
     autoindex on;
-    alias /home/marceloesileia/media
-;
+    alias /home/marcelokfws/app_repo/media;
   }
 
   # ATTENTION: cursodjango.socket
-
   location / {
-    proxy_pass http://unix:/run/cursodjango.socket
-;
+    proxy_pass http://unix:/run/cursodjango.socket;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
