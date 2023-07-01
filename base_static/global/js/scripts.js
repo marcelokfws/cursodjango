@@ -14,7 +14,7 @@
     }
   })();
   
-  my_scope();
+  
   (() => {
     const buttonCloseMenu = document.querySelector('.button-close-menu');
     const buttonShowMenu = document.querySelector('.button-show-menu');
