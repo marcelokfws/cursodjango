@@ -50,7 +50,7 @@ class Recipe(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
     )
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True, default='')
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     cover = models.ImageField(
