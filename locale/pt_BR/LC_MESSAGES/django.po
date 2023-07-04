@@ -28,7 +28,7 @@ msgstr "Receita"
 
 #: .\recipes\models.py:91
 msgid "Recipes"
-msgstr "Receita"
+msgstr "Receitas"
 
 #: .\recipes\templates\recipes\partials\recipe.html:59
 msgid "Preparation"
