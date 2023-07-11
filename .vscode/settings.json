@@ -60,7 +60,10 @@
         "javascript": "javascriptreact",
         "typescript": "typescriptreact"
     },
-    "python.formatting.provider": "none"
+    "python.formatting.provider": "none",
+    "files.exclude": {
+        "**/.git": false
+    }
 }
 
 

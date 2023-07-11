@@ -1,4 +1,3 @@
-# Create your views here.
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -21,7 +20,7 @@ def register_view(request):
 
 def register_create(request):
     if not request.POST:
-        raise Http404
+        raise Http404()
 
     POST = request.POST
     request.session['register_form_data'] = POST
@@ -79,6 +78,7 @@ def logout_view(request):
     if request.POST.get('username') != request.user.username:
         messages.error(request, 'Invalid logout user')
         return redirect(reverse('authors:login'))
+
     messages.success(request, 'Logged out successfully')
     logout(request)
     return redirect(reverse('authors:login'))

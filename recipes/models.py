@@ -1,5 +1,7 @@
 import os
+import string
 from collections import defaultdict
+from random import SystemRandom
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -32,7 +34,10 @@ class RecipeManager(models.Manager):
                 F('author__last_name'), Value(' ('),
                 F('author__username'), Value(')'),
             )
-        ).order_by('-id')
+        ) \
+            .order_by('-id') \
+            .select_related('category', 'author') \
+            .prefetch_related('tags')
 
 
 class Recipe(models.Model):
@@ -47,6 +52,10 @@ class Recipe(models.Model):
     preparation_steps = models.TextField()
     preparation_steps_is_html = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=False)
+    cover = models.ImageField(
+        upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True,
         default=None,
@@ -55,10 +64,6 @@ class Recipe(models.Model):
         User, on_delete=models.SET_NULL, null=True
     )
     tags = models.ManyToManyField(Tag, blank=True, default='')
-    updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False)
-    cover = models.ImageField(
-        upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='')
 
     def __str__(self):
         return self.title
@@ -87,8 +92,13 @@ class Recipe(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f'{slugify(self.title)}'
-            self.slug = slug
+            rand_letters = ''.join(
+                SystemRandom().choices(
+                    string.ascii_letters + string.digits,
+                    k=5,
+                )
+            )
+            self.slug = slugify(f'{self.title}-{rand_letters}')
 
         saved = super().save(*args, **kwargs)
 
@@ -97,6 +107,7 @@ class Recipe(models.Model):
                 self.resize_image(self.cover, 840)
             except FileNotFoundError:
                 ...
+
         return saved
 
     def clean(self, *args, **kwargs):
